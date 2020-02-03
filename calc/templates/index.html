@@ -2,11 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Django Hello World Example</title>
+    <title>Twenty Four</title>
+
+    <style>
+        #solution {
+            display:none;
+        }
+        #numbers,#solution {
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<h2>
-    Hello Django! :)
-</h2>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery=True %}
+    {% bootstrap_messages %}
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header"><h1>Let's play Twenty Four!</h1></div>
+            <div class="card-body">
+                <p>Given four numbers, use operations +, -, *, / (addition, subtraction, multiplication, or division) to get to 24</p>
+                <p>Example Numbers: <code>[2,7,1,5]</code></p>
+                <p>Example Solution: <code>(7/1+5)*2=24</code></p>
+                <div id="numbers">{% for n in numbers %}<span>{{n}}  </span>{% endfor %}</div>
+                <div id="solution">{{solution}} = {{target}}</div>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    {% bootstrap_button "Refresh" href="." id="refresh-btn" %}
+                    {% bootstrap_button "Show Solution" id="show-solution-btn" %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("#show-solution-btn").click(function(e) {
+            $("#solution").show();
+            $("#show-solution-btn").hide();
+        })
+    </script>
+
 </body>
 </html>
